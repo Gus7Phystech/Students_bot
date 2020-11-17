@@ -6,6 +6,7 @@ from telebot import types
 
 bot = telebot.TeleBot(config.token)
 
+
 @bot.inline_handler(func=lambda query: len(query.query) > 0)
 def query_text(query):
     start_r = types.InlineQueryResultArticle(
@@ -15,10 +16,12 @@ def query_text(query):
     )
     bot.answer_inline_query(query.id, [start_r])
 
+
 @bot.message_handler(commands=['start', 'help'])
 def send_welcome(message):
     bot.reply_to(message, "Hi! I'm a help-bot which will be able to plot some stuff.\
                             For now I can only ask you to send me a file and receive it. Try now using /plot!")
+
 
 @bot.message_handler(commands=['plot'])
 def send_file(message):
@@ -45,9 +48,10 @@ def send_file(message):
         except Exception as e:
             bot.reply_to(message, e)
 
+
 @bot.message_handler(func=lambda message: True)
 def echo_all(message):
     bot.send_message(message.chat.id, 'Прости, пока не знаю, как на это ответить. Посмотри, что я могу в /help')
 
-bot.polling()
 
+bot.polling()
