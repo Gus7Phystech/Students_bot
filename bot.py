@@ -1,8 +1,4 @@
-import config
-import re
-
-import telebot
-from telebot import types
+from libraries import *
 
 bot = telebot.TeleBot(config.token)
 
