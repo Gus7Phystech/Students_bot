@@ -1,5 +1,8 @@
 from libraries import *
 
+def create_plot(id):
+    return True
+
 
 def open_xl_sheet(name = 'ex.xlsx', sheet_ind = 0):
     '''
