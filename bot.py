@@ -1,4 +1,5 @@
 from libraries import *
+#import plotter
 
 bot = telebot.TeleBot(config.token)
 
@@ -35,15 +36,27 @@ def send_file(message):
             file_info = bot.get_file(message.document.file_id)
             downloaded_file = bot.download_file(file_info.file_path)
             bot.reply_to(message, "Пожалуй, я сохраню это")
-            ''' #file can be saved locally
-            src = 'C:/Python/Project/tg_bot/files/received/' + message.document.file_name;
-            with open(src, 'wb') as new_file:
+            #file can be saved locally
+
+            src = str(message.chat.id) + ".xlsx"
+            with open(src, 'wb+') as new_file:
                 new_file.write(downloaded_file)
+
+            bot.send_message(message.chat.id, 'Рисую...')
+
+            reply = True #plotter.create_plot(message.chat.id)
+            #file to send: "{}.pdf".format(message.chat.id) "{}.png".format(message.chat.id)
+
+            with open("{}.png".format('foo'), 'rb') as file:
+                bot.send_photo(message.chat.id, file)
+
+            '''
+            with open("{}.pdf".format(message.chat.id), 'rb') as file:
+                bot.send_photo(message.chat.id, file)
             '''
 
         except Exception as e:
             bot.reply_to(message, e)
-
 
 @bot.message_handler(func=lambda message: True)
 def echo_all(message):

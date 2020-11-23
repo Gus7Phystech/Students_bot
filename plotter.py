@@ -117,10 +117,12 @@ def interphase():
     #plt.xticks([i for i in range(0, 451, 50)]) #FIXME - may be necessary
     #plt.yticks([i/1000 for i in range(0, 36, 5)])
     plt.show()
+
     plt.savefig('foo.png')
     plt.savefig('foo.pdf')
 
 interphase()
+
 '''    
 z = np.polyfit(x, y, 1)
 p = np.poly1d(z)
@@ -136,7 +138,7 @@ plt.show()
 '''
 
 #TODO
-#zero - done
+#zero - half-done
 #errors
 #ticks on figure
 #saving figure after all
