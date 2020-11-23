@@ -36,15 +36,16 @@ def send_file(message):
             file_info = bot.get_file(message.document.file_id)
             downloaded_file = bot.download_file(file_info.file_path)
             bot.reply_to(message, "Пожалуй, я сохраню это")
-            #file can be saved locally
 
-            src = str(message.chat.id) + ".xlsx"
+            #file can be saved locally
+            src = str(message.chat.id) + "." + file_info.file_path.split(".")[-1]
             with open(src, 'wb+') as new_file:
                 new_file.write(downloaded_file)
 
             bot.send_message(message.chat.id, 'Рисую...')
 
-            reply = True #plotter.create_plot(message.chat.id)
+            response = True #plotter.create_plot(message.chat.id)
+
             #file to send: "{}.pdf".format(message.chat.id) "{}.png".format(message.chat.id)
 
             with open("{}.png".format('foo'), 'rb') as file:
