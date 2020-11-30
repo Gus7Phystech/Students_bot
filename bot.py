@@ -44,7 +44,7 @@ def send_file(message):
 
             bot.send_message(message.chat.id, 'Рисую...')
 
-            response = True #plotter.create_plot(message.chat.id)
+            response = True #plotter.create_plot(src)
 
             #file to send: "{}.pdf".format(message.chat.id) "{}.png".format(message.chat.id)
 
