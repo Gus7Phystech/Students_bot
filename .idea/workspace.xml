@@ -5,8 +5,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/Students_bot.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Students_bot.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plotter.py" beforeDir="false" afterPath="$PROJECT_DIR$/plotter.py" afterDir="false" />
     </list>
     <list id="f30ae3c9-cd9c-48bc-bc5e-a48bb9324e73" name="Default" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -27,6 +25,7 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="JupyterTrust" id="e3e64a0d-c63b-4ba7-ae1a-8eaa74ac2fc9" />
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
@@ -43,6 +42,8 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
@@ -50,7 +51,7 @@
       <recent name="C:\Users\kolya\PycharmProjects\Students_bot" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.plotter">
+  <component name="RunManager" selected="Python.bot">
     <configuration default="true" type="tests" factoryName="Attests">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -82,6 +83,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/bot.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -103,6 +105,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/plotter.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -112,10 +115,14 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Python.plotter" />
+      <item itemvalue="Python.bot" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.plotter" />
         <item itemvalue="Python.bot" />
+        <item itemvalue="Python.plotter" />
       </list>
     </recent_temporary>
   </component>
@@ -131,17 +138,34 @@
     </task>
     <servers />
   </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
-  </component>
   <component name="WindowStateProjectService">
     <state x="548" y="166" key="FileChooserDialogImpl" timestamp="1606718088474">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="548" y="166" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1606718088474" />
+    <state width="1877" height="312" key="GridCell.Tab.0.bottom" timestamp="1606729755748">
+      <screen x="0" y="0" width="1920" height="1160" />
+    </state>
+    <state width="1877" height="312" key="GridCell.Tab.0.bottom/0.0.1920.1160@0.0.1920.1160" timestamp="1606729755748" />
+    <state width="1877" height="312" key="GridCell.Tab.0.center" timestamp="1606729755747">
+      <screen x="0" y="0" width="1920" height="1160" />
+    </state>
+    <state width="1877" height="312" key="GridCell.Tab.0.center/0.0.1920.1160@0.0.1920.1160" timestamp="1606729755747" />
+    <state width="1877" height="312" key="GridCell.Tab.0.left" timestamp="1606729755747">
+      <screen x="0" y="0" width="1920" height="1160" />
+    </state>
+    <state width="1877" height="312" key="GridCell.Tab.0.left/0.0.1920.1160@0.0.1920.1160" timestamp="1606729755747" />
+    <state width="1877" height="312" key="GridCell.Tab.0.right" timestamp="1606729755748">
+      <screen x="0" y="0" width="1920" height="1160" />
+    </state>
+    <state width="1877" height="312" key="GridCell.Tab.0.right/0.0.1920.1160@0.0.1920.1160" timestamp="1606729755748" />
     <state x="277" y="57" key="SettingsEditor" timestamp="1605563920833">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="277" y="57" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1605563920833" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Students_bot$bot.coverage" NAME="bot Coverage Results" MODIFIED="1606729755730" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Students_bot$plotter.coverage" NAME="plotter Coverage Results" MODIFIED="1606729653366" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

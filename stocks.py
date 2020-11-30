@@ -1,8 +1,4 @@
-import datetime as dt
-from pandas.plotting import register_matplotlib_converters
-import matplotlib.pyplot as plt
-from pandas_datareader import data
-import requests
+from libraries import *
 
 def main(stock, years=1, month=0):  # function to get data from Yahoo Finance
     end = dt.datetime.today().strftime('%Y-%m-%d')  # today as the end date
