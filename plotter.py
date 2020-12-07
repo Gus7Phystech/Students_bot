@@ -8,7 +8,15 @@ def _to_bool(x):
 
     return res
 
-def open_xl_sheet(name='ex.xlsx', sheet_ind=0):
+
+def create_plot(src='example.xlsx', user_id='123'):
+
+    interphase(src, user_id)
+
+    return True
+
+
+def open_xl_sheet(name='example.xlsx', sheet_ind=0):
     """
     gets filename name - str, index of sheet in book - int
     prints test values
@@ -85,8 +93,8 @@ def fitting(x, y, deg, zero=False):
     return p
 
 
-def interphase():
-    print("read xlsx\n")
+def interphase(name='example.xlsx', user_id='123'):
+    #print("read xlsx\n")
     types_of_dots = [
         '.',
         'o',
@@ -97,7 +105,7 @@ def interphase():
     sheet = []
     fl = True
     while fl:
-        file_name = 'example.xlsx'
+        file_name = name
 
         try:
             num_sheet = 0  # number of sheet
@@ -106,37 +114,16 @@ def interphase():
         except:
             break
 
-    print("read comm. info\n")
+    #print("read comm. info\n")
     title = sheet.cell(0, 1).value
     n_graph = int(sheet.cell(3, 1).value)
     x_label = sheet.cell(1, 1).value
     y_label = sheet.cell(2, 1).value
     fig, ax = preparing_figure(title, x_label, y_label)
 
-    print("read graph info\n")
-    '''
+    #print("read graph info\n")
     for i in range(1, n_graph + 1):
-        x, y = collect_data_from_sheet(sheet, i)
-        zero = False  # FIXME - meaning must be collected from sheet
-        error_on_plot(x, y, sheet.cell(1, 4 + 4 * (i - 1)).value,
-                      sheet.cell(1, 6 + 4 * (i - 1)).value)  # FIXME - make the func work normally
-
-        if sheet.cell(i + 3, 1).value == 'y':
-            deg = sheet.cell(i + 3, 2).value
-
-            p = fitting(x, y, deg, zero)
-            print(p)
-            if zero:
-                xp = np.linspace(0, max(x))  # FIXME +10% to max to have padding
-            else:
-                xp = np.linspace(min(x), max(x))  # FIXME \pm 10% to meanings to have paddings
-
-            plt.plot(xp, p(xp), label=sheet.cell(i + 3, 0).value, )
-        else:
-            plt.plot(x, y, types_of_dots[i - 1], label=sheet.cell(i + 3, 0).value)
-    '''
-    for i in range(1, n_graph + 1):
-        i = 2
+        #i = 2
         j = 2 + 3 * (i - 1) + 1
         x, y, approx, deg, zero = collect_data_from_sheet(sheet, j)
 
@@ -145,17 +132,25 @@ def interphase():
 
             if zero:
                 x_p = np.linspace(0, int(max(x) * 1.1))
+                if n_graph == 1:
+                    plt.xlim(0, int(max(x) * 1.1))
+                    plt.ylim(0, p(int(max(x) * 1.1)))
             else:
                 dist = max(x) - min(x)
 
                 x_p = np.linspace(np.floor(min(x) - 0.05 * dist),
                                   np.ceil(max(x) + 0.05 * dist))
+                if n_graph == 1:
+                    plt.xlim(np.floor(min(x) - 0.05 * dist),
+                             np.ceil(max(x) + 0.05 * dist))
+                    plt.ylim(p(np.floor(min(x) - 0.05 * dist)),
+                             p(np.ceil(max(x) + 0.05 * dist)))
 
             ax.plot(x_p, p(x_p), 'r-')
         else:
             ax.plot(x, y, 'r-')
 
-        print("plotting\n")
+        #print("plotting\n")
         # plotting
         ax.plot(x, y, 'r' + types_of_dots[1])
 
@@ -163,31 +158,14 @@ def interphase():
 
     plt.show()
 
-    fig.savefig('foo.png', dpi=500)
-    fig.savefig('foo.pdf', dpi=500)
+    #fig.savefig('foo.png', dpi=500)
+    fig.savefig('files_to_send\\' + user_id + '.pdf', dpi=500)
 
 
-def create_plot(src):
-    return True
-
-
-interphase()
-'''    
-z = np.polyfit(x, y, 1)
-p = np.poly1d(z)
-'''
-'''
-#plotting
-xp = np.linspace(-1, 6)
-plt.plot(x, y, 'x', label = r'AC режим' )
-plt.plot(x, y, '.', label = r'DC режим' )
-plt.legend(loc='best')
-
-plt.show()
-'''
+#create_plot()
 
 # TODO
-# zero - half-done
+# zero - done
 # errors
 # ticks on figure
-# saving figure after all
+# saving figure after all - done
