@@ -1,9 +1,12 @@
 from libraries import *
 
 
-def create_plot(src):
-    return True
+def _to_bool(x):
+    res = False
+    if x == 'Y' or x == 'y':
+        res = True
 
+    return res
 
 def open_xl_sheet(name='ex.xlsx', sheet_ind=0):
     """
@@ -13,23 +16,30 @@ def open_xl_sheet(name='ex.xlsx', sheet_ind=0):
     """
     book = xlrd.open_workbook(name)
     sheet = book.sheet_by_index(sheet_ind)
-    print(sheet.cell(1, 1).value)  # test cell: (x, y) x - строка, y - столбец
-    print(sheet.nrows, sheet.ncols)  # число строк и столбцов
     return sheet
 
 
-def collect_data_from_sheet(sheet, graphic_pos=1):
+def collect_data_from_sheet(sheet, graphic_pos):
     x = []
     y = []
+    approx = False
+    deg = 0
+    zero = False
     i = 0
-    print(sheet.cell(i + 1, 1 + 4 * (graphic_pos - 1)).value, type(sheet.cell(1, 1).value))
-    print(sheet.cell(i + 1, 3 + 4 * (graphic_pos - 1)).value)
-    while i < sheet.nrows - 1:
-        if type(sheet.cell(i + 1, 3 + 4 * (graphic_pos - 1)).value) != str:
-            x.append(sheet.cell(i + 1, 3 + 4 * (graphic_pos - 1)).value)
-            y.append(sheet.cell(i + 1, 5 + 4 * (graphic_pos - 1)).value)
+    #print(sheet.cell(5 + i, graphic_pos).value)
+    #print(sheet.cell(5 + i, graphic_pos + 1).value)
+    while i < sheet.nrows - 6:
+        if type(sheet.cell(5 + i + 1, graphic_pos).value) != str and type(sheet.cell(5 + i + 1, graphic_pos + 1).value) != str:
+            x.append(sheet.cell(5 + i + 1, graphic_pos).value)
+            y.append(sheet.cell(5 + i + 1, graphic_pos + 1).value)
         i += 1
-    return x, y
+
+    approx = _to_bool(sheet.cell(1, graphic_pos).value)
+    if approx:
+        deg = sheet.cell(2, graphic_pos).value
+        zero = _to_bool(sheet.cell(3, graphic_pos).value)
+
+    return x, y, approx, deg, zero
 
 
 def preparing_figure(fig_title, x_label, y_label):
@@ -43,12 +53,14 @@ def preparing_figure(fig_title, x_label, y_label):
 
     # Сетка:
     ax.minorticks_on()
-    ax.grid(True)
-    ax.grid(which='minor', linestyle=':')
-    ax.grid(which='minor', linestyle=':')
+    ax.grid(which='major', axis='both')
+    ax.grid(which='minor', axis='both', linestyle=':')
 
+    fig.set_figheight(7)
+    fig.set_figwidth(10)
     # Легенда:
     # matplotlib.rcParams["legend.framealpha"] = 1
+    return fig, ax
 
 
 def error_on_plot(x_set, y_set, x_error=0, y_error=0):
@@ -74,6 +86,14 @@ def fitting(x, y, deg, zero=False):
 
 
 def interphase():
+    print("read xlsx\n")
+    types_of_dots = [
+        '.',
+        'o',
+        'x',
+        'v',
+        '>'
+    ]
     sheet = []
     fl = True
     while fl:
@@ -86,18 +106,15 @@ def interphase():
         except:
             break
 
-    title = sheet.cell(0, 0).value
-    n_graph = int(sheet.cell(1, 0).value)
-    x_label = sheet.cell(2, 0).value
-    y_label = sheet.cell(3, 0).value
-    preparing_figure(title, x_label, y_label)
-    types_of_dots = [
-        '.',
-        'x',
-        'v',
-        '>'
-    ]
+    print("read comm. info\n")
+    title = sheet.cell(0, 1).value
+    n_graph = int(sheet.cell(3, 1).value)
+    x_label = sheet.cell(1, 1).value
+    y_label = sheet.cell(2, 1).value
+    fig, ax = preparing_figure(title, x_label, y_label)
 
+    print("read graph info\n")
+    '''
     for i in range(1, n_graph + 1):
         x, y = collect_data_from_sheet(sheet, i)
         zero = False  # FIXME - meaning must be collected from sheet
@@ -117,21 +134,44 @@ def interphase():
             plt.plot(xp, p(xp), label=sheet.cell(i + 3, 0).value, )
         else:
             plt.plot(x, y, types_of_dots[i - 1], label=sheet.cell(i + 3, 0).value)
+    '''
+    for i in range(1, n_graph + 1):
+        i = 2
+        j = 2 + 3 * (i - 1) + 1
+        x, y, approx, deg, zero = collect_data_from_sheet(sheet, j)
 
-    # plotting
+        if approx:
+            p = fitting(x, y, deg, zero)
 
-    plt.legend(loc='best')
+            if zero:
+                x_p = np.linspace(0, int(max(x) * 1.1))
+            else:
+                dist = max(x) - min(x)
 
-    # plt.xticks([i for i in range(0, 451, 50)]) #FIXME - may be necessary
-    # plt.yticks([i/1000 for i in range(0, 36, 5)])
+                x_p = np.linspace(np.floor(min(x) - 0.05 * dist),
+                                  np.ceil(max(x) + 0.05 * dist))
+
+            ax.plot(x_p, p(x_p), 'r-')
+        else:
+            ax.plot(x, y, 'r-')
+
+        print("plotting\n")
+        # plotting
+        ax.plot(x, y, 'r' + types_of_dots[1])
+
+    # plt.legend(loc='best')
+
     plt.show()
 
-    plt.savefig('foo.png')
-    plt.savefig('foo.pdf')
+    fig.savefig('foo.png', dpi=500)
+    fig.savefig('foo.pdf', dpi=500)
+
+
+def create_plot(src):
+    return True
 
 
 interphase()
-
 '''    
 z = np.polyfit(x, y, 1)
 p = np.poly1d(z)
