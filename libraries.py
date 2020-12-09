@@ -1,3 +1,5 @@
+# here are all required libraries for all files
+
 import os
 
 import config
@@ -5,6 +7,8 @@ import re
 
 import telebot
 from telebot import types
+from keyboa import keyboa_maker
+
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib
