@@ -154,12 +154,10 @@ def interphase(name='example.xlsx', user_id='123'):
         # plotting
         ax.plot(x, y, 'r' + types_of_dots[1])
 
-    # plt.legend(loc='best')
+    #plt.legend(loc='best')
 
-    plt.show()
-
-    #fig.savefig('foo.png', dpi=500)
-    fig.savefig('files_to_send\\' + user_id + '.pdf', dpi=500)
+    fig.savefig('files_to_send\\{}.png'.format(user_id), dpi=500)
+    fig.savefig('files_to_send\\{}.pdf'.format(user_id), dpi=500)
 
 
 #create_plot()

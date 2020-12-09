@@ -1,5 +1,5 @@
 from libraries import *
-#import plotter
+import plotter
 import stocks
 
 bot = telebot.TeleBot(config.token)
@@ -36,7 +36,7 @@ def stocks_handler(message):
 
 
 def ticker_handler(message):
-        print(message.text)
+
         bot.send_message(message.chat.id, "Ищу {}...".format(message.text))
         try:
             ticker = message.text
@@ -71,24 +71,26 @@ def send_file(message):
 
             #file can be saved locally
             src = "received\\" + str(message.chat.id) + "." + file_info.file_path.split(".")[-1]
+
             with open(src, 'wb+') as new_file:
                 new_file.write(downloaded_file)
 
             bot.send_message(message.chat.id, 'Рисую...')
 
-            #response = plotter.create_plot(src, message.chat.id)
+            response = plotter.create_plot(src, message.chat.id)
 
             #file to send: "{}.pdf".format(message.chat.id) "{}.png".format(message.chat.id)
+            if response:
+                with open("files_to_send\\{}.png".format(message.chat.id), 'rb') as file:
+                    bot.send_photo(message.chat.id, file)
 
-            with open("files_to_send\\{}.png".format('foo'), 'rb') as file:
-                bot.send_photo(message.chat.id, file)
+                os.remove("files_to_send\\{}.png".format(message.chat.id))
 
-            #os.remove("files_to_send\\{}.png".format(message.chat.id))
-            os.remove(src)
-            ''''
-            with open("{}.pdf".format(message.chat.id), 'rb') as file:
-                bot.send_photo(message.chat.id, file)
-            '''
+                with open("files_to_send\\{}.pdf".format(message.chat.id), 'rb') as file:
+                    bot.send_document(message.chat.id, file)
+
+                os.remove("files_to_send\\{}.pdf".format(message.chat.id))
+                os.remove(src)
 
         except Exception as e:
             bot.reply_to(message, e)

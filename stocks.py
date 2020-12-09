@@ -30,4 +30,5 @@ def plot(id, df, stock_name, start, end):
 
         plt.close()
 
-        return str(round(close_prices[-1], 2)) + " " + "USD — цена на " + str(dates[-1])
+        return str(round(close_prices[-1], 2)) + " " + "USD — цена на " + str(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+
