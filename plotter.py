@@ -28,12 +28,13 @@ def open_xl_sheet(name='example.xlsx', sheet_ind=0):
 
 
 def collect_data_from_sheet(sheet, graphic_pos):
-    x = []
-    y = []
+    x, y = [], []
     approx = False
     deg = 0
     zero = False
     i = 0
+    x_err, y_err = 0, 0
+    curve_name = 'Curve_' + str(graphic_pos // 3)
     #print(sheet.cell(5 + i, graphic_pos).value)
     #print(sheet.cell(5 + i, graphic_pos + 1).value)
     while i < sheet.nrows - 6:
@@ -47,7 +48,12 @@ def collect_data_from_sheet(sheet, graphic_pos):
         deg = sheet.cell(2, graphic_pos).value
         zero = _to_bool(sheet.cell(3, graphic_pos).value)
 
-    return x, y, approx, deg, zero
+    x_err = float(sheet.cell(4, graphic_pos).value)
+    y_err = float(sheet.cell(4, graphic_pos + 1).value)
+
+    curve_name = sheet.cell(0, graphic_pos - 1).value
+
+    return x, y, approx, deg, zero, x_err, y_err, curve_name
 
 
 def preparing_figure(fig_title, x_label, y_label):
@@ -123,10 +129,10 @@ def interphase(name='example.xlsx', user_id='123'):
 
     #print("read graph info\n")
     for i in range(1, n_graph + 1):
-        #i = 2
+        #i = 1
         j = 2 + 3 * (i - 1) + 1
-        x, y, approx, deg, zero = collect_data_from_sheet(sheet, j)
-
+        x, y, approx, deg, zero, x_err, y_err, curve_name = collect_data_from_sheet(sheet, j)
+        #print(curve_name)
         if approx:
             p = fitting(x, y, deg, zero)
 
@@ -146,18 +152,22 @@ def interphase(name='example.xlsx', user_id='123'):
                     plt.ylim(p(np.floor(min(x) - 0.05 * dist)),
                              p(np.ceil(max(x) + 0.05 * dist)))
 
-            ax.plot(x_p, p(x_p), 'r-')
+            ax.plot(x_p, p(x_p), 'r-', label=curve_name)
         else:
-            ax.plot(x, y, 'r-')
+            ax.plot(x, y, 'r-', label=curve_name)
+
 
         #print("plotting\n")
         # plotting
         ax.plot(x, y, 'r' + types_of_dots[1])
+        ax.errorbar(x, y, xerr=x_err, yerr=y_err, fmt='.')
 
-    #plt.legend(loc='best')
+    plt.legend(loc='best')
 
-    fig.savefig('files_to_send\\{}.png'.format(user_id), dpi=500)
-    fig.savefig('files_to_send\\{}.pdf'.format(user_id), dpi=500)
+    plt.show()
+
+    fig.savefig('files_to_send\\' + str(user_id) + '.png', dpi=500)
+    fig.savefig('files_to_send\\' + str(user_id) + '.pdf', dpi=500)
 
 
 #create_plot()
