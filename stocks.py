@@ -56,3 +56,26 @@ def plot(id, df, stock_name, start, end): # making a plot of the stock's dynamic
     # returning current price
     return str(round(close_prices[-1], 2)) + " " + "USD — цена на " + str(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
 
+
+def sliding_mean(df, stock_name):
+    dates = df.index.tolist()  # making list of dates
+    close_prices = df.Close.tolist()  # saving close prices as a list
+
+    sliding_means = []
+    for i in range(30):
+        sliding_means.append(np.mean(close_prices[-i-60:-i-29]))
+
+    register_matplotlib_converters()  # This function modifies the global matplotlib.units.registry dictionary
+
+    plt.plot(dates[-30:], sliding_means)  # adding points
+
+    # adding titles
+    plt.title(company_name(stock_name) + "скользящее среднее за последние 2 месяца")
+    plt.xlabel('Date')
+    plt.ylabel('Moving average (USD)')
+
+    plt.gcf().autofmt_xdate()  # fitting points
+
+    plt.savefig('files_to_send\\{}_{}_sm.png'.format(id, stock_name))  # saving figure locally in files_to_send
+
+    plt.close()  # closing matplotlib
