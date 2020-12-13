@@ -61,22 +61,24 @@ def moving_mean(id, df, stock_name):
     dates = df.index.tolist()  # making list of dates
     close_prices = df.Close.tolist()  # saving close prices as a list
     
-    days_in_month = 30 # constant to account moving mean of this number
+    days_required = 60 # constant to account moving mean of this number
     moving_means = []
-    for i in range(days_in_month):
-        moving_means.append(np.mean(close_prices[-days_in_month+i-2:i-days_in_month]))
+    for i in range(days_required):
+        moving_means.append(np.mean(close_prices[-days_required+i-2:i-days_required]))
 
     register_matplotlib_converters()  # This function modifies the global matplotlib.units.registry dictionary
 
-    plt.plot(dates[-days_in_month:], moving_means)  # adding points
+    plt.plot(dates[-days_required:], close_prices[-days_required:])  # adding points close price
+    plt.plot(dates[-days_required:], moving_means, label='Скользящее среднее')  # adding points moving mean
+    plt.legend(loc='best')
 
     # adding titles
-    plt.title(company_name(stock_name) + " скользящее среднее за последний месяц")
+    plt.title(company_name(stock_name) + " со скользящим средним")
     plt.xlabel('Date')
-    plt.ylabel('Moving average (USD)')
+    plt.ylabel('USD')
 
     plt.gcf().autofmt_xdate()  # fitting points
 
-    plt.savefig('files_to_send\\{}_{}_sm.png'.format(id, stock_name))  # saving figure locally in files_to_send
+    plt.savefig('files_to_send\\{}_{}_mm.png'.format(id, stock_name))  # saving figure locally in files_to_send
 
     plt.close()  # closing matplotlib

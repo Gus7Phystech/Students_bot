@@ -20,3 +20,5 @@ import matplotlib.pyplot as plt
 from pandas_datareader import data
 import requests
 from datetime import datetime
+
+import requests

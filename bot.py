@@ -69,17 +69,17 @@ def stocks_mode(message):
 
             # stocks.plot returns the last info about the stock and here we send it, starting plotting the data
             bot.send_message(message.chat.id, stocks.plot(message.chat.id, df, ticker, start_date, end_date))
-            # start plotting moving_mean
+            # start plotting figure with moving_mean
             stocks.moving_mean(message.chat.id, df, ticker)
 
-            # stocks.plot user_id_ticker.png and user_id moving mean in files_to_send for us -- we send it
+            # stocks.plot user_id_ticker.png and user_id_ticker_mm.png -- moving mean in files_to_send for us -- we send it
             with open("files_to_send\\{}_{}.png".format(message.chat.id, ticker), 'rb') as file:
                 bot.send_photo(message.chat.id, file)
             os.remove("files_to_send\\{}_{}.png".format(message.chat.id, ticker)) # deleting sent data
 
-            with open('files_to_send\\{}_{}_sm.png'.format(message.chat.id, ticker), 'rb') as file:
+            with open('files_to_send\\{}_{}_mm.png'.format(message.chat.id, ticker), 'rb') as file:
                 bot.send_photo(message.chat.id, file)
-            os.remove('files_to_send\\{}_{}_sm.png'.format(message.chat.id, ticker)) # deleting sent plot
+            os.remove('files_to_send\\{}_{}_mm.png'.format(message.chat.id, ticker)) # deleting sent plot
 
             # moving to the next step of the mode
             msg = bot.send_message(message.chat.id, "Введи новый тикер или /escape")
