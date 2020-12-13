@@ -69,6 +69,8 @@ def stocks_mode(message):
 
             # stocks.plot returns the last info about the stock and here we send it, starting plotting the data
             bot.send_message(message.chat.id, stocks.plot(message.chat.id, df, ticker, start_date, end_date))
+            # start plotting moving_mean
+            stocks.moving_mean(message.chat.id, df, ticker)
 
             # stocks.plot user_id_ticker.png and user_id moving mean in files_to_send for us -- we send it
             with open("files_to_send\\{}_{}.png".format(message.chat.id, ticker), 'rb') as file:
