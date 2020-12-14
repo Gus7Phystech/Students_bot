@@ -128,19 +128,20 @@ def send_plot(message):
         :param message:
         :return:
         '''
+        # downloading received file to RAM
+        file_info = bot.get_file(message.document.file_id)
+        downloaded_file = bot.download_file(file_info.file_path)
+        bot.reply_to(message, "Секундочку...")
+
+        # future src of the file received
+        src = "received\\" + str(message.chat.id) + "." + file_info.file_path.split(".")[-1]
+
+        # saving file locally
+        with open(src, 'wb+') as new_file:
+            new_file.write(downloaded_file)
+
+        #trying to plot
         try:
-            # downloading received file to RAM
-            file_info = bot.get_file(message.document.file_id)
-            downloaded_file = bot.download_file(file_info.file_path)
-            bot.reply_to(message, "Секундочку...")
-
-            # future src of the file received
-            src = "received\\" + str(message.chat.id) + "." + file_info.file_path.split(".")[-1]
-
-            # saving file locally
-            with open(src, 'wb+') as new_file:
-                new_file.write(downloaded_file)
-
             bot.send_message(message.chat.id, 'Рисую...')
 
             # plotter.py starts with create_plot(src, user_id) and makes a plot
@@ -155,11 +156,12 @@ def send_plot(message):
                     bot.send_document(message.chat.id, file)
 
                 os.remove("files_to_send\\{}.pdf".format(message.chat.id)) # removing sent file
-                os.remove(src) # removing received excel-file
-
         except Exception as e:
             # if exception thrown just escaping
             bot.reply_to(message, 'Что-то пошло не так... Попробуй поправить что-то в твоем файле.')
+
+        os.remove(src)  # removing received excel-file
+
 
 # asks group of needed schedule
 @bot.message_handler(commands=['schedule'])
@@ -187,7 +189,7 @@ def get_schedule(message):
 # if sth unknown sent we echo that we dont know what've received
 @bot.message_handler(func=lambda message: True)
 def echo_all(message):
-    bot.send_message(message.chat.id, 'Камон, ты токсик')#'Прости, пока не знаю, как на это ответить. Посмотри, что я могу в /help')
+    bot.send_message(message.chat.id, 'Прости, пока не знаю, как на это ответить. Посмотри, что я могу в /help')
 
 
 # the method starts polling of the object bot
