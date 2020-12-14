@@ -108,6 +108,13 @@ def interphase(name='example.xlsx', user_id='123'):
         'v',
         '>'
     ]
+    types_of_colors = [
+        'r',
+        'b',
+        'g',
+        'v',
+        'black'
+    ]
     sheet = []
     fl = True
     while fl:
@@ -129,7 +136,6 @@ def interphase(name='example.xlsx', user_id='123'):
 
     #print("read graph info\n")
     for i in range(1, n_graph + 1):
-        #i = 1
         j = 2 + 3 * (i - 1) + 1
         x, y, approx, deg, zero, x_err, y_err, curve_name = collect_data_from_sheet(sheet, j)
         #print(curve_name)
@@ -152,15 +158,15 @@ def interphase(name='example.xlsx', user_id='123'):
                     plt.ylim(p(np.floor(min(x) - 0.05 * dist)),
                              p(np.ceil(max(x) + 0.05 * dist)))
 
-            ax.plot(x_p, p(x_p), 'r-', label=curve_name)
+            ax.plot(x_p, p(x_p), c=types_of_colors[i-1], ls='-', label=curve_name)
         else:
-            ax.plot(x, y, 'r-', label=curve_name)
+            ax.plot(x, y, c=types_of_colors[i-1], ls='-', label=curve_name)
 
 
         #print("plotting\n")
         # plotting
-        ax.plot(x, y, 'r' + types_of_dots[1])
-        ax.errorbar(x, y, xerr=x_err, yerr=y_err, fmt='.')
+        ax.plot(x, y, c=types_of_colors[i-1], marker=types_of_dots[i-1], ls='')
+        ax.errorbar(x, y, xerr=x_err, yerr=y_err, fmt='', ls='', c=types_of_colors[i-1])
 
     plt.legend(loc='best')
 
@@ -170,7 +176,7 @@ def interphase(name='example.xlsx', user_id='123'):
     fig.savefig('files_to_send\\' + str(user_id) + '.pdf', dpi=500)
 
 
-#create_plot()
+create_plot()
 
 # TODO
 # zero - done
