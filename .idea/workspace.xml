@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="94919418-5693-4ad7-9190-0f210501482a" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/Students_bot.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Students_bot.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
 <<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/example.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/example.xlsx" afterDir="false" />
@@ -28,7 +30,7 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="JupyterTrust" id="e3e64a0d-c63b-4ba7-ae1a-8eaa74ac2fc9" />
+  <component name="JupyterTrust" id="8d7223e5-466a-4240-8fb6-0c9139cb3c32" />
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
@@ -44,8 +46,12 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
@@ -138,6 +144,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1605563421261</updated>
+      <workItem from="1607323048120" duration="1799000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed imports in stocker. Files are deleted after usage">
       <created>1606731660657</created>
@@ -148,6 +155,9 @@
     </task>
     <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
 <<<<<<< HEAD
   <component name="WindowStateProjectService">
@@ -190,6 +200,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Fixed imports in stocker. Files are deleted after usage" />
@@ -220,6 +231,10 @@
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
     <state width="1877" height="312" key="GridCell.Tab.0.right/0.0.1920.1160@0.0.1920.1160" timestamp="1606731703994" />
+    <state x="456" y="43" key="RollbackChangesDialog" timestamp="1607323459228">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="456" y="43" key="RollbackChangesDialog/0.0.1280.680@0.0.1280.680" timestamp="1607323459228" />
     <state x="346" y="80" key="SettingsEditor" timestamp="1606731773482">
       <screen x="0" y="0" width="1920" height="1160" />
 >>>>>>> f15543500ffe11642bd22850c07e56ac277ef468
@@ -230,9 +245,10 @@
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
     <state x="552" y="312" key="Vcs.Push.Dialog.v2/0.0.1920.1160@0.0.1920.1160" timestamp="1606731834470" />
-    <state x="777" y="493" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1606732093272">
-      <screen x="0" y="0" width="1920" height="1160" />
+    <state x="518" y="289" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1607328436209">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
+    <state x="518" y="289" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.680@0.0.1280.680" timestamp="1607328436209" />
     <state x="777" y="493" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1160@0.0.1920.1160" timestamp="1606732093272" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
