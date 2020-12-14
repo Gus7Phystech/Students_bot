@@ -2,6 +2,7 @@ from libraries import * # here are all required libraries for all files
 
 import plotter # methods for plotting
 import stocks # methods for finding stocks and making a plot of their dynamics
+import timetable # methods for getting schedule of MIPT
 
 bot = telebot.TeleBot(config.token) # initializing bot-object via string token in config
 
@@ -101,7 +102,7 @@ def help_stocks(message):
     bot.send_message(message.chat.id, "Например, пришли в /stocks \"NFLX\", чтобы спросить про Netflix, Inc.")
     bot.send_message(message.chat.id, "Для акций московской биржи добавляй .ME. Например, GAZP.ME")
     bot.send_message(message.chat.id, "Лучше всего смотри тикеры здесь: https://finance.yahoo.com/")
-    bot.send_message(message.chat.id, "Для того, чтобы выйти из режима /stocks, набери /escape")
+    bot.send_message(message.chat.id, "Для того, чтобы выйти из режима /stocks, нужно набрать /escape")
 
 
 # makes a plot from received excel file
@@ -114,7 +115,7 @@ def send_plot(message):
     bot.reply_to(message, 'Лабы... Понимаю...')
 
     # sending example excel file
-    f = open('example.xlsx', "rb")
+    f = open('files_to_send\\example.xlsx', "rb")
     bot.send_document(message.chat.id, f)
     f.close()
 
@@ -160,11 +161,33 @@ def send_plot(message):
             # if exception thrown just escaping
             bot.reply_to(message, 'Что-то пошло не так... Попробуй поправить что-то в твоем файле.')
 
+# asks group of needed schedule
+@bot.message_handler(commands=['schedule'])
+def start_schedule(message):
+    msg = bot.send_message(message.chat.id, 'Введи группу и номер дня недели. Например, \"Б02-005 1\"')
+    bot.register_next_step_handler(msg, get_schedule)
+
+
+# sends schedule
+def get_schedule(message):
+    schedule = '' # here will be the schedule
+    # timetable.start_timetable gets schedule via group name and day number
+    try:
+        # format of request is Б02-005 1 -- group name and day number (1-7)
+        schedule_array = timetable.start_timetable(message.text.split()[0], message.text.split()[1])
+        # forming schedule
+        for each in schedule_array:
+            schedule += each + '\n'
+        # sending what we've got
+        bot.send_message(message.chat.id, schedule)
+    except Exception as e:
+        bot.send_message(message.chat.id, "Прости, я не знаю такую группу")
+
 
 # if sth unknown sent we echo that we dont know what've received
 @bot.message_handler(func=lambda message: True)
 def echo_all(message):
-    bot.send_message(message.chat.id, 'Прости, пока не знаю, как на это ответить. Посмотри, что я могу в /help')
+    bot.send_message(message.chat.id, 'Камон, ты токсик')#'Прости, пока не знаю, как на это ответить. Посмотри, что я могу в /help')
 
 
 # the method starts polling of the object bot

@@ -1,9 +1,9 @@
 import xlrd
 
-#Constants
-fl = 0 #Shows if the group found in the table
+# Constants
+fl = 0 # Shows if the group found in the table
 
-column_of_day = 0  #In the final version can be found in function find_sth
+column_of_day = 0  # In the final version can be found in function find_sth
 column_of_time = 1
 line_of_head = 4
 
@@ -11,18 +11,18 @@ line_of_head = 4
 
 Tables = dict()
 
-Tables['Б0'] = 'recieved\\1-kurs-osen-2020.xls'
-Tables['Б0Д'] = 'recieved\\1-kurs-osen-2020-_-do.xls'
+Tables['Б0'] = 'timetables\\1-kurs-osen-2020.xls'
+Tables['Б0Д'] = 'timetables\\1-kurs-osen-2020-_-do.xls'
 
-Tables['Б9'] = 'recieved\\2-kurs-osen-2020.xls'
-Tables['Б9Д'] = 'recieved\\2-kurs-osen-2020-do.xls'
+Tables['Б9'] = 'timetables\\2-kurs-osen-2020.xls'
+Tables['Б9Д'] = 'timetables\\2-kurs-osen-2020-do.xls'
 
-Tables['Б8'] = 'recieved\\3-kurs-osen-2020.xls'
-Tables['Б8Д'] = 'recieved\\3-kurs-osen-2020-do.xls'
+Tables['Б8'] = 'timetables\\3-kurs-osen-2020.xls'
+Tables['Б8Д'] = 'timetables\\3-kurs-osen-2020-do.xls'
 
-Tables['Б7'] = 'recieved\\4-kurs-osen-2020.xls'
+Tables['Б7'] = 'timetables\\4-kurs-osen-2020.xls'
 
-Tables['М0'] = 'recieved\\5-kurs-osen-2020.xls'
+Tables['М0'] = 'timetables\\5-kurs-osen-2020.xls'
 
 #Dictionary of days
 

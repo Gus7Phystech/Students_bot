@@ -176,8 +176,6 @@ def interphase(name='example.xlsx', user_id='123'):
     fig.savefig('files_to_send\\' + str(user_id) + '.pdf', dpi=500)
 
 
-create_plot()
-
 # TODO
 # zero - done
 # errors
