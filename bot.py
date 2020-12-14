@@ -104,7 +104,7 @@ def help_stocks(message):
     bot.send_message(message.chat.id, "Для того, чтобы выйти из режима /stocks, набери /escape")
 
 
-# makes a plot from received     excel file
+# makes a plot from received excel file
 @bot.message_handler(commands=['plot'])
 def send_plot(message):
     '''
