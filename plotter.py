@@ -170,14 +170,9 @@ def interphase(name='example.xlsx', user_id='123'):
 
     plt.legend(loc='best')
 
-    plt.show()
+    #plt.show()
 
     fig.savefig('files_to_send\\' + str(user_id) + '.png', dpi=500)
     fig.savefig('files_to_send\\' + str(user_id) + '.pdf', dpi=500)
 
-
-# TODO
-# zero - done
-# errors
-# ticks on figure
-# saving figure after all - done
+    plt.close()

@@ -14,7 +14,7 @@ def send_welcome(message):
         :param message: message from user
         :return: nothing
     '''
-    bot.reply_to(message, "Привет! Я бот-помощник. Я умею рисовать графики в /plot для лабораторных и прочего,\
+    bot.reply_to(message, "Привет! Я бот-помощник. Я умею рисовать графики в /plot для лабораторных и прочего, \
 а также могу рассказать про стоимость акций в /stocks")
 
 
@@ -27,6 +27,7 @@ def send_welcome(message):
     '''
     bot.reply_to(message, "Если хочешь, чтобы я нарисовал график по данным из excel-файла, набери /plot. \
 Если хочешь узнать текущую стоимость акций, набери /stocks.")
+    bot.send_message(message.chat.id, "Для того, чтобы выйти из режима /stocks, нужно набрать /escape")
 
 # It handles start of stocks_mode and goes to stocks_mode
 @bot.message_handler(commands=['stocks'])
@@ -87,7 +88,7 @@ def stocks_mode(message):
             bot.register_next_step_handler(msg, stocks_mode)
         except Exception as e:
             # moving to the next step of the mode if sth went wrong
-            msg = bot.reply_to(message, "Что-то пошло не так(( Попробуй другой тикер.")
+            msg = bot.reply_to(message, "Что-то пошло не так(( Попробуй другой тикер или /escape")
             bot.register_next_step_handler(msg, stocks_mode)
 
 
