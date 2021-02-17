@@ -141,31 +141,20 @@ def interphase(name='example.xlsx', user_id='123'):
         #print(curve_name)
         if approx:
             p = fitting(x, y, deg, zero)
+            print(p)
 
             if zero:
-                x_p = np.linspace(0, int(max(x) * 1.1))
-                if n_graph == 1:
-                    plt.xlim(0, int(max(x) * 1.1))
-                    plt.ylim(0, p(int(max(x) * 1.1)))
+                x_p = np.linspace(0, max(x))
             else:
-                dist = max(x) - min(x)
-
-                x_p = np.linspace(np.floor(min(x) - 0.05 * dist),
-                                  np.ceil(max(x) + 0.05 * dist))
-                if n_graph == 1:
-                    plt.xlim(np.floor(min(x) - 0.05 * dist),
-                             np.ceil(max(x) + 0.05 * dist))
-                    plt.ylim(p(np.floor(min(x) - 0.05 * dist)),
-                             p(np.ceil(max(x) + 0.05 * dist)))
-
+                x_p = np.linspace(min(x), max(x))
             ax.plot(x_p, p(x_p), c=types_of_colors[i-1], ls='-', label=curve_name)
         else:
-            ax.plot(x, y, c=types_of_colors[i-1], ls='-', label=curve_name)
+            ax.plot(x, y, types_of_dots[i-1], c=types_of_colors[i-1], label=curve_name)
 
 
         #print("plotting\n")
         # plotting
-        ax.plot(x, y, c=types_of_colors[i-1], marker=types_of_dots[i-1], ls='')
+        #ax.plot(x, y, c=types_of_colors[i-1], marker=types_of_dots[i-1], ls='')
         ax.errorbar(x, y, xerr=x_err, yerr=y_err, fmt='', ls='', c=types_of_colors[i-1])
 
     plt.legend(loc='best')
