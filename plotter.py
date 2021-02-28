@@ -11,9 +11,9 @@ def _to_bool(x):
 
 def create_plot(src='example.xlsx', user_id='123'):
 
-    interphase(src, user_id)
+    p = interphase(src, user_id)
 
-    return True
+    return p
 
 
 def open_xl_sheet(name='example.xlsx', sheet_ind=0):
@@ -133,7 +133,7 @@ def interphase(name='example.xlsx', user_id='123'):
     x_label = sheet.cell(1, 1).value
     y_label = sheet.cell(2, 1).value
     fig, ax = preparing_figure(title, x_label, y_label)
-
+    p = 0
     #print("read graph info\n")
     for i in range(1, n_graph + 1):
         j = 2 + 3 * (i - 1) + 1
@@ -141,13 +141,13 @@ def interphase(name='example.xlsx', user_id='123'):
         #print(curve_name)
         if approx:
             p = fitting(x, y, deg, zero)
-            print(p)
 
             if zero:
                 x_p = np.linspace(0, max(x))
             else:
                 x_p = np.linspace(min(x), max(x))
             ax.plot(x_p, p(x_p), c=types_of_colors[i-1], ls='-', label=curve_name)
+            ax.plot(x, y, types_of_dots[i - 1], c=types_of_colors[i - 1])
         else:
             ax.plot(x, y, types_of_dots[i-1], c=types_of_colors[i-1], label=curve_name)
 
@@ -165,3 +165,5 @@ def interphase(name='example.xlsx', user_id='123'):
     fig.savefig('files_to_send\\' + str(user_id) + '.pdf', dpi=500)
 
     plt.close()
+
+    return p

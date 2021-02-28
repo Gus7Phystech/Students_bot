@@ -146,8 +146,9 @@ def send_plot(message):
             bot.send_message(message.chat.id, 'Рисую...')
 
             # plotter.py starts with create_plot(src, user_id) and makes a plot
-            response = plotter.create_plot(src, message.chat.id)
-            if response: # if everything went OK there will be user_id.png and .pdf in files_to_send
+            p = plotter.create_plot(src, message.chat.id)
+            if p: # if everything went OK there will be user_id.png and .pdf in files_to_send
+                bot.send_message(message.chat.id, str(p))
                 with open("files_to_send\\{}.png".format(message.chat.id), 'rb') as file:
                     bot.send_photo(message.chat.id, file)
 
